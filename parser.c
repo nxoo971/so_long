@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:00:10 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/18 21:46:59 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/18 22:14:12 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_bool	valid_extension(const char *filename)
 	return (ft_strcmp(filename + (i - 4), ".ber") == 0);
 }
 
-int	get_sizemap(int fd, t_map *map)
+int	get_sizemap(int fd, t_map *map) 
 {
 	char	buff[1];
 	int		height;

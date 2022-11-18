@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:13:42 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/18 21:57:56 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/18 22:12:25 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av)
 			return (-1);
 		if (parse_map(& map) < 0)
 			return (-1);
-		if (valid_map((const t_map)map) <= 0)
+		if (valid_map(map) <= 0)
 			return (-1);
 		print_map(map);
 	}
