@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nxoo <nxoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:13:42 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/18 22:12:25 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/19 04:37:06 by nxoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
-#include "mlx/mlx/mlx.h"
+//#include "mlx/mlx/mlx.h"
 #include "solong.h"
 
 void	print_map(const t_map map)
@@ -26,7 +26,10 @@ void	print_map(const t_map map)
 
 int	main(int ac, char **av)
 {
-	t_map	map;
+	static t_map	map = {
+		.y = -1,
+		.x = -1
+	};
 
 	if (ac == 2)
 	{
@@ -35,7 +38,9 @@ int	main(int ac, char **av)
 			return (-1);
 		if (parse_map(& map) < 0)
 			return (-1);
-		if (valid_map(map) <= 0)
+		if (valid_map(& map) <= 0)
+			return (-1);
+		if (valid_path(map, map.y, map.x) < 0)
 			return (-1);
 		print_map(map);
 	}
