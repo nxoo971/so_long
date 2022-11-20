@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:00:10 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/20 13:24:31 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:06:41 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	parse_map(t_map *map)
 
 void	virus_col(t_map *map, int y, int x, int add)
 {
-	while (y >= 0 && y < map->height - 1 && map->map[y][x] != WALL)
+	while (y >= 1 && y < map->height - 1 && map->map[y][x] != WALL)
 	{
 		if (!map->test)
 			map->test = map->map[y][x] != '*';
@@ -109,7 +109,7 @@ void	virus_col(t_map *map, int y, int x, int add)
 
 void	virus_row(t_map *map, int y, int x, int add)
 {
-	while (x >= 0 && x < map->width - 1 && map->map[y][x] != WALL)
+	while (x >= 1 && x < map->width - 1 && map->map[y][x] != WALL)
 	{
 		if (!map->test)
 			map->test = map->map[y][x] != '*';
@@ -129,6 +129,7 @@ void	virus(int y, int x, t_map *map)
 int	find_valid_path(t_map *map)
 {
 	// send p position first
+	print_map(*map);
 	virus(map->start_y, map->start_x, map);
 	map->test = 0;
 	// others later

@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 02:41:25 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/20 13:21:42 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:06:31 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ typedef struct s_map
 	int		test;
 } t_map;
 
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
+typedef struct	s_info {
+	t_data	data;
+	int		img_width;
+	int		img_height;
+}				t_info;
+void	print_map(const t_map map);
 t_bool	valid_extension(const char *filename);
 t_bool	valid_map(t_map *map);
 
