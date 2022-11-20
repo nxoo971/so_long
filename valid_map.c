@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nxoo <nxoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 21:15:25 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/19 04:13:17 by nxoo             ###   ########.fr       */
+/*   Updated: 2022/11/20 12:13:38 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,22 @@ static t_bool	side_check(t_map map, int y, int x)
 
 static t_bool	valid_startposition(t_map *tmap)
 {
-	const char	**map;
+	char	**map;
 	int	found;
 	int	i;
-	int	j;
 
 	i = 0;
 	found = 0;
 	map = tmap->map;
-	while (map[i])
+	while (i < (tmap->height * tmap->width))
 	{
-		j = 0;
-		while (map[i][j])
+		if (map[i / tmap->width][i % tmap->width] == START)
 		{
-			if (map[i][j] == START)
-			{
-				if (found > 0)
-					return (faux);
-				tmap->y = i;
-				tmap->x = j;
-				found++;
-			}
-			j++;
+			found++;
+			if (found > 1)
+				return (faux);
+			tmap->y = i / tmap->width;
+			tmap->x = i % tmap->width;
 		}
 		i++;
 	}

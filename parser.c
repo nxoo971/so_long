@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nxoo <nxoo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:00:10 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/19 04:43:15 by nxoo             ###   ########.fr       */
+/*   Updated: 2022/11/20 10:48:13 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ int	get_sizemap(int fd, t_map *map)
 	int		width;
 	int		save_width;
 
-	save_width = 0;
+	save_width = -1;
 	height = 0;
+	width = 0;
 	while (read(fd, & buff, 1))
 	{
 		if (buff == '\n')
 		{
-			if (width != save_width && save_width != 0)
+			if (width != save_width && save_width != -1)
 				return (-1);
 			height++;
 			save_width = width;
@@ -95,26 +96,54 @@ int	parse_map(t_map *map)
 	return (set_map(map));
 }
 
-int	valid_path(t_map map, int y, int x)
+void	virus_col(t_map *map, int y, int x, int add)
 {
-	if (y < 0 || x < 0)
-		return (-1);
-	if (y >= map.height || x >= map.width)
-		return (-1);
+	int	tmp;
 
-	if (map.map[y][x] == WALL)
-		return (-1);
-	if (map.map[y][x] == EXIT)
-		return (1);
+	tmp = y;
+	while (tmp >= 0 && tmp < map->height - 1 && map->map[tmp][x] != WALL)
+	{
+		if (!map->test)
+			map->test = map->map[tmp][x] != '*';
+		map->map[tmp][x] = '*';
+		tmp += add;
+	}
+}
 
-	if (valid_path(map, y + 1, x) < 0)
-		return (-1);
-	else if (valid_path(map, y, x + 1) < 0)
-		return (-1);
-	else if (valid_path(map, y - 1, x) < 0)
-		return (-1);
-	else if (valid_path(map, y, x - 1) < 0)
-		return (-1);
+void	virus_row(t_map *map, int y, int x, int add)
+{
+	int	tmp;
 
-	return (1);
+	tmp = x;
+	while (tmp >= 0 && tmp < map->width - 1 && map->map[y][tmp] != WALL)
+	{
+		if (!map->test)
+			map->test = map->map[y][tmp] != '*';
+		map->map[y][tmp] = '*';
+		tmp += add;
+	}
+}
+
+void	virus(int y, int x, t_map *map)
+{
+	virus_col(map, y, x, 1);
+	virus_col(map, y, x, -1);
+	virus_row(map, y, x, -1);
+	virus_row(map, y, x, 1);
+}
+
+int	find_valid_path(t_map *map)
+{
+	// send p position first
+	virus(map->y, map->x, map);
+	map->test = 0;
+	// others later
+	for (int i = 1; i < map->height - 1; i++) {
+		for (int j = 1; j < map->width - 1; j++) {
+			if (map->map[i][j] == '*') {
+				virus(i, j, map);
+			}
+		}
+	}
+	return 0;
 }

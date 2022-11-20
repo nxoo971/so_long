@@ -28,7 +28,7 @@ LIBFT_DIR = libft
 PRINTF_DIR = ft_printf
 MLX = $(MLX_DIR)/libmlx.a
 MLXFLAGS = -L. -lXext -L. -lX11
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -g3 -Wall -Wextra -Werror 
 
 OBJS = ${SRCS:.c=.o}
 
