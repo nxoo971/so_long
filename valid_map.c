@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 21:15:25 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/20 12:13:38 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/20 14:36:44 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,38 +30,49 @@ static t_bool	side_check(t_map map, int y, int x)
 	return (vrai);
 }
 
-static t_bool	valid_startposition(t_map *tmap)
+static void	set_position(const int pos[2], int index, t_map *map)
 {
-	char	**map;
-	int	found;
-	int	i;
+	if (pos[0] == 1 && map->start_y == -1 && map->start_x == -1)
+	{
+		map->start_y = index / map->width;
+		map->start_x = index % map->width;
+	}
+	if (pos[1] == 1 && map->exit_y == -1 && map->exit_x == -1)
+	{
+		map->exit_y = index / map->width;
+		map->exit_x = index % map->width;
+	}
+}
+
+static t_bool	valid_startexitposition(t_map *tmap)
+{
+	char		**map;
+	char		c;
+	static int	founds[4] = {0, 0, 0, 0};
+	int			i;
 
 	i = 0;
-	found = 0;
 	map = tmap->map;
 	while (i < (tmap->height * tmap->width))
 	{
-		if (map[i / tmap->width][i % tmap->width] == START)
+		c = map[i / tmap->width][i % tmap->width];
+		if (c == START || c == EXIT || c == BLANK || c == ITEM)
 		{
-			found++;
-			if (found > 1)
+			founds[0] += c == START;
+			founds[1] += c == EXIT;
+			founds[2] += c == BLANK;
+			founds[3] += c == ITEM;
+			if (founds[0] > 1 || founds[1] > 1)
 				return (faux);
-			tmap->y = i / tmap->width;
-			tmap->x = i % tmap->width;
+			set_position((const int [2]) {founds[0], founds[1]}, i, tmap);
 		}
 		i++;
 	}
-	return (tmap->y > -1 && tmap->x > -1);
+	return (founds[0] > 0 && founds[1] > 0 && founds[2] > 0 && founds[3] > 0);
 }
 
 t_bool	valid_map(t_map *map)
 {
-	// check first line
 	return (valid_wall((*map).map[0]) && valid_wall((*map).map[(*map).height - 1]) &&
-		side_check(*map, 0, 0) && side_check(*map, 0, (*map).width - 1) && valid_startposition(map));
-		
-	// check coter gauche | droit
-	// check last line
-
-	
+		side_check(*map, 0, 0) && side_check(*map, 0, (*map).width - 1) && valid_startexitposition(map));
 }

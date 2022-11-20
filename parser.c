@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:00:10 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/20 10:48:13 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/20 13:24:31 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,29 +98,23 @@ int	parse_map(t_map *map)
 
 void	virus_col(t_map *map, int y, int x, int add)
 {
-	int	tmp;
-
-	tmp = y;
-	while (tmp >= 0 && tmp < map->height - 1 && map->map[tmp][x] != WALL)
+	while (y >= 0 && y < map->height - 1 && map->map[y][x] != WALL)
 	{
 		if (!map->test)
-			map->test = map->map[tmp][x] != '*';
-		map->map[tmp][x] = '*';
-		tmp += add;
+			map->test = map->map[y][x] != '*';
+		map->map[y][x] = '*';
+		y += add;
 	}
 }
 
 void	virus_row(t_map *map, int y, int x, int add)
 {
-	int	tmp;
-
-	tmp = x;
-	while (tmp >= 0 && tmp < map->width - 1 && map->map[y][tmp] != WALL)
+	while (x >= 0 && x < map->width - 1 && map->map[y][x] != WALL)
 	{
 		if (!map->test)
-			map->test = map->map[y][tmp] != '*';
-		map->map[y][tmp] = '*';
-		tmp += add;
+			map->test = map->map[y][x] != '*';
+		map->map[y][x] = '*';
+		x += add;
 	}
 }
 
@@ -135,7 +129,7 @@ void	virus(int y, int x, t_map *map)
 int	find_valid_path(t_map *map)
 {
 	// send p position first
-	virus(map->y, map->x, map);
+	virus(map->start_y, map->start_x, map);
 	map->test = 0;
 	// others later
 	for (int i = 1; i < map->height - 1; i++) {

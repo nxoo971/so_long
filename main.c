@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:13:42 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/20 10:49:53 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/20 14:37:13 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@ void	print_map(const t_map map)
 			ft_putchar(map.map[i][j]);
 		ft_putchar('\n');
 	}
-	ft_putchar('\n');
 }
 
 int	main(int ac, char **av)
 {
 	static t_map	map = {
-		.y = -1,
-		.x = -1,
+		.start_y = -1,
+		.start_x = -1,
+		
+		.exit_y = -1,
+		.exit_x = -1,
 
 		.test = 1,
 	};
@@ -45,9 +47,12 @@ int	main(int ac, char **av)
 			return (-1);
 		while (map.test)
 			find_valid_path(& map);
-		print_map(map);
+		if (map.map[map.exit_y][map.exit_x] == '*')
+			print_map(map);
+		else
+		return (ft_printf("{yellow}Wrong path\n{reset}"));
 	}
 	else
-		return (ft_printf("{bgred}Wrong arguments\n{reset}"));
+		return (ft_printf("{red}Wrong arguments\n{reset}"));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 02:41:25 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/20 09:18:08 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/20 13:21:42 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ typedef struct s_map
 	int		items;
 	int		blanks;
 	// START P point
-	int		y;
-	int		x;
+	int		start_y;
+	int		start_x;
+	// EXIT E point
+	int		exit_y;
+	int		exit_x;
 
 	// ????
 	int		test;
