@@ -32,19 +32,19 @@ CFLAGS = -g3 -Wall -Wextra -Werror
 
 OBJS = ${SRCS:.c=.o}
 
-$(NAME):  $(MLX) $(OBJS) 
+$(NAME):  $(MLX) $(OBJS)
 		${CC} $(OBJS) $(MLX) $(MLXFLAGS) -o $(NAME) ft_printf/libftprintf.a
 		
 #$(OBJS) : $(HEADER)
 
 
 all:	$(NAME)
-		@echo "$(GREEN)so_long compiled!$(DEF_COLOR)"
+#		@echo "$(GREEN)so_long compiled!$(DEF_COLOR)"
 $(MLX):
 				$(MAKE) -C $(MLX_DIR)
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+##	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 
 bonus: $(NAME_BONUS)
 	   @echo "$(GREEN)bonus compiled!$(DEF_COLOR)"
@@ -58,13 +58,13 @@ $(NAME_BONUS):$(MLX) $(OBJS_BONUS)
 
 clean:
 	@$(RM) ${OBJS}
-	@echo "$(BLUE)so_long object files cleaned!$(DEF_COLOR)"
+#	@echo "$(BLUE)so_long object files cleaned!$(DEF_COLOR)"
 
 fclean: clean
 	@$(RM) $(NAME) $(NAME_BONUS)
-	@echo "$(CYAN) have been deleted$(DEF_COLOR)"
+#	@echo "$(CYAN) have been deleted$(DEF_COLOR)"
 
 re: fclean all
-	@echo "$(GREEN)Cleaned and rebuilt everything for so_long!$(DEF_COLOR)"
+#	@echo "$(GREEN)Cleaned and rebuilt everything for so_long!$(DEF_COLOR)"
 
 .PHONY: all clean fclean re minilibx

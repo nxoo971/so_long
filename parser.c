@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:00:10 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/20 17:06:41 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/21 07:17:32 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	virus_col(t_map *map, int y, int x, int add)
 			map->test = map->map[y][x] != '*';
 		map->map[y][x] = '*';
 		y += add;
+
 	}
 }
 
@@ -129,7 +130,6 @@ void	virus(int y, int x, t_map *map)
 int	find_valid_path(t_map *map)
 {
 	// send p position first
-	print_map(*map);
 	virus(map->start_y, map->start_x, map);
 	map->test = 0;
 	// others later
