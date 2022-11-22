@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 02:41:25 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/21 10:21:44 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/22 22:00:41 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,25 @@
 # define	ITEM		'C'
 # define	SPRITESIZE	32
 
+# define	BLOC_GREEN	5
+# define	BLOC_RED	6
+# define	BLOC_YELLOW	7
+# define	BLOC_BLUE	8
+
 enum {
 	ESC		= 65307,
 
 	LEFT	= 65361,
 	TOP		= 65362,
 	RIGHT	= 65363,
-	DOWN	= 65364
+	DOWN	= 65364,
+
+	_START	= 3,
+	_EXIT	= 1,
+	_WALL	= 0,
+	_BLANK	= 2,
+	_ITEM	= 4,
+	_BLOCK	= 5
 };
 
 typedef struct s_map
@@ -54,23 +66,25 @@ typedef struct s_map
 	int		test;
 } t_map;
 
-typedef struct	s_info {
-	int		img_width;
-	int		img_height;
-}				t_info;
 
 typedef struct	s_data {
 	void	*mlx;
 	void	*win;
+	int		width;
+	int		height;
+	void	*chooseplayer;
 	void	*img[256];
 	char	*addr[256];
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	t_info	info;
+	int		index_perso;
 	t_map	map;
 }				t_data;
 
+//	free.c
+void	memdel(char **ptr);
+void	memdelarr(char **arr);
 void	print_map(const t_map map);
 t_bool	valid_extension(const char *filename);
 t_bool	valid_map(t_map *map);

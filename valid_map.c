@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 21:15:25 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/21 07:14:34 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/22 19:56:00 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_bool	valid_startexitposition(t_map *tmap)
 {
 	char		**map;
 	char		c;
-	static int	founds[4] = {0, 0, 0, 0};
+	int	founds[4] = {0, 0, 0, 0};
 	int			i;
 
 	i = 0;

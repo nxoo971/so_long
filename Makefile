@@ -1,7 +1,7 @@
 
 NAME = so_long 
 
-SRCS = main.c parser.c valid_map.c
+SRCS = main.c parser.c valid_map.c free.c
 
 # Colors
 
