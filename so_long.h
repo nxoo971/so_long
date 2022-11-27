@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 23:30:47 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/24 19:29:58 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/27 04:46:44 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define ITEM			'C'
 # define SPRITESIZE		32
 
-# define SIZE_PATH		9
+# define SIZE_PATH		16
 
 # define BLOC_GREEN		5
 # define BLOC_RED		6
@@ -76,14 +76,15 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 
-	int		width;
-	int		height;
+	int		width[256];
+	int		height[256];
 
 	void	*chooseplayer;
 	int		index_perso;
 	int		move_count;
 
 	void	*img[256];
+	int		point_img[256][2];
 	char	*addr[256];
 
 	int		bits_per_pixel;
@@ -96,7 +97,7 @@ typedef struct s_data
 //	free.c
 void	memdel(char **ptr);
 int		memdelarr(char **arr);
-int		free_mlx(t_data data, int index);
+int		free_mlx(t_data data, int index, int end);
 //	potential_errors.c
 int		potential_errors(t_data *data);
 t_bool	valid_extension(const char *filename);
@@ -115,4 +116,8 @@ int		draw_wall(t_data *data);
 int		load_images(t_data *data);
 void	print_map(const t_map map);
 int		no_collectibles(t_map map);
+//	key_hook.c
+int		key_hook(int keycode, t_data *data);
+void	print_count(t_data *data, int counter);
+
 #endif

@@ -6,11 +6,12 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 02:46:04 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/24 20:23:06 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/26 08:43:14 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "so_long_bonus.h"
 
 void	memdel(char **ptr)
 {
@@ -32,7 +33,7 @@ int	memdelarr(char **arr)
 	return (0);
 }
 
-int	free_mlx(t_data data, int index)
+int	free_mlx(t_data data, int index, int end)
 {
 	int	i;
 	int	max;
@@ -40,9 +41,9 @@ int	free_mlx(t_data data, int index)
 	i = -1;
 	max = index;
 	if (max == -1)
-		max = SIZE_PATH;
+		max = end;
 	while (++i < max)
-		mlx_destroy_image(data.mlx, data.img[i]);
+			mlx_destroy_image(data.mlx, data.img[i]);
 	if (index != 0)
 	{
 		mlx_clear_window(data.mlx, data.win);

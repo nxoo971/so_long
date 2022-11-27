@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 01:35:45 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/24 13:05:12 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/26 08:55:22 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ t_bool	get_sizemap(int fd, t_map *map)
 	save_width = -1;
 	height = 0;
 	width = 0;
-	while (read(fd, &buff, 1))
+	buff = 0;
+	while (read(fd, & buff, 1))
 	{
 		if (buff == '\n')
 		{
@@ -73,7 +74,7 @@ int	set_map(t_map *map)
 		if (read(fd, map->map[i], map->width) < 0)
 			return (0);
 		map->map[i][map->width] = '\0';
-		if (read(fd, &c, 1) < 0 || c != '\n')
+		if (read(fd, & c, 1) < 0 || c != '\n')
 			return (0);
 	}
 	return (1);
@@ -90,9 +91,18 @@ int	parse_map(t_map *map)
 	if (get_sizemap(fd, map) == faux)
 		return (0);
 	map->map = malloc(sizeof(char *) * (map->height + 1));
+	if (!map->map)
+		return (0);
 	i = -1;
 	while (++i < map->height)
+	{
 		map->map[i] = malloc(map->width + 1);
+		if (!map->map[i])
+		{
+			memdelarr(map->map);
+			return (0);
+		}
+	}
 	map->map[i] = 0;
 	return (set_map(map));
 }

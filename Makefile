@@ -1,9 +1,9 @@
 
 NAME = so_long 
 
-SRCS = main.c parser.c valid_map.c potential_errors.c virus.c load_images.c move.c draw.c free.c
+SRCS = main.c parser.c valid_map.c potential_errors.c virus.c load.c move.c move_bonus.c draw.c free.c key_hook.c
 
-# Colors
+BONUS = main_bonus.c parser.c valid_map.c potential_errors.c virus.c load.c move_bonus.c move.c draw.c free.c key_hook.c
 
 DEF_COLOR = \033[0;39m
 GRAY = \033[0;90m
@@ -28,32 +28,29 @@ LIBFT_DIR = libft
 PRINTF_DIR = ft_printf
 MLX = $(MLX_DIR)/libmlx.a
 MLXFLAGS = -L. -lXext -L. -lX11
-CFLAGS = -g3 -Wall -Wextra -Werror 
+CFLAGS = -g 
 
 OBJS = ${SRCS:.c=.o}
+
+OBJS_BONUS = ${BONUS:.c=.o}
 
 all:	$(NAME)
 
 $(NAME):  $(MLX) $(OBJS)
 		${CC} $(OBJS) $(MLX) $(MLXFLAGS) -o $(NAME) ft_printf/libftprintf.a
-		
-#$(OBJS) : $(HEADER)
-		@echo "$(GREEN)so_long compiled!$(DEF_COLOR)"
+
 $(MLX):
 				$(MAKE) -C $(MLX_DIR)
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 
-bonus: $(NAME_BONUS)
-	   @echo "$(GREEN)bonus compiled!$(DEF_COLOR)"
-		
-
-$(NAME_BONUS):$(MLX) $(OBJS_BONUS) 
-		${CC} $(CFLAGS) $(LIBFT) $(PRINTF) $(MLX) $(MLXFLAGS) -o $(NAME_BONUS)
+bonus:	$(MLX) $(OBJS_BONUS)
+	${CC} $(OBJS_BONUS) $(MLX) $(MLXFLAGS) -o $(NAME) ft_printf/libftprintf.a
+	@echo "$(GREEN)bonus compiled!$(DEF_COLOR)"
 
 clean:
-	@$(RM) ${OBJS}
+	@$(RM) ${OBJS} $(OBJS_BONUS)
 	@echo "$(BLUE)so_long object files cleaned!$(DEF_COLOR)"
 
 fclean: clean

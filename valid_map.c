@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 21:15:25 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/24 13:07:40 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/24 20:33:39 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ static t_bool	valid_startexitposition(t_map *tmap)
 {
 	char	**map;
 	char	c;
-	int		founds[4];
+	int		founds[3];
 	int		i;
 
 	i = 0;
 	map = tmap->map;
-	ft_bzero(& founds, sizeof(int) * 4);
+	ft_bzero(& founds, sizeof(int) * 3);
 	while (i < (tmap->height * tmap->width))
 	{
 		c = map[i / tmap->width][i % tmap->width];
@@ -61,15 +61,14 @@ static t_bool	valid_startexitposition(t_map *tmap)
 		{
 			founds[0] += c == START;
 			founds[1] += c == EXIT;
-			founds[2] += c == BLANK;
-			founds[3] += c == ITEM;
+			founds[2] += c == ITEM;
 			if (founds[0] > 1 || founds[1] > 1)
 				return (faux);
 			set_position((const int [2]){founds[0], founds[1]}, i, tmap);
 		}
 		i++;
 	}
-	return (founds[0] > 0 && founds[1] > 0 && founds[2] > 0 && founds[3] > 0);
+	return (founds[0] > 0 && founds[1] > 0 && founds[2] > 0);
 }
 
 t_bool	valid_map(t_map *map)
