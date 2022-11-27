@@ -6,16 +6,14 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:04:53 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/27 05:25:05 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:05:51 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "so_long_bonus.h"
 
 void	set_images(t_data *data, int y, int x)
 {
-	//ft_printf("\n{red}%d|%d{reset}\n", y, x);
 	if (data->map.map[y][x] == WALL)
 	{
 		if (y == 0 || (y > 0 && x == 0) || (y == data->map.height - 1) \
@@ -61,57 +59,12 @@ int	draw_wall(t_data *data)
 		}
 		i += SPRITESIZE - 1;
 	}
-	print_count(data, data->move_count);
-	return (1);
-}
-
-int	draw_main_lobby(t_data *data)
-{
-	int	y;
-	int	x;
-	if (load_images_bonus(data) < 0)
-		return (0);
-
-	mlx_put_image_to_window(data->mlx, data->win, data->img[SIZE_PERSO - 1], 0, 0);
-	int start = ((1007 - (SPRITESIZE * (SIZE_PERSO - 1))) / 2) - ((SPRITESIZE * (SIZE_PERSO - 2)) / 2);
-	for (int i = 0; i < SIZE_PERSO - 1; i++)
-	{
-		x = start + (64 * i);
-		y = 640 / 2 + 96;
-		data->point_img[i][0] = y / 32;
-		data->point_img[i][1] = x / 32;
-		//mlx_put_image_to_window(data->mlx, data->win, data->img[i], x, y);
-	}
-	draw(data, data->map.start_y, data->map.start_x, Moha);
-	return (1);
-}
-
-int	draw_bonus(t_data *data)
-{
-	int	y;
-	int	x;
-	if (load_images_bonus(data) < 0)
-		return (0);
-
-	mlx_put_image_to_window(data->mlx, data->win, data->img[SIZE_PERSO - 1], 0, 0);
-	int start = ((1007 - (SPRITESIZE * (SIZE_PERSO - 1))) / 2) - ((SPRITESIZE * (SIZE_PERSO - 2)) / 2);
-	for (int i = 0; i < SIZE_PERSO - 1; i++)
-	{
-
-		x = start + (64 * i);
-		y = 640 / 2 + 96;
-		data->point_img[i][0] = y / 32;
-		data->point_img[i][1] = x / 32;
-		mlx_put_image_to_window(data->mlx, data->win, data->img[i], x, y);
-	}
-	draw(data, data->map.start_y, data->map.start_x, Moha);
 	return (1);
 }
 
 int	draw(t_data *data, int y, int x, int imgcode)
 {
-	//ft_printf("\n{blue}%d|%d - %d{reset}\n", y, x,imgcode);
-	if (data->img[imgcode] && imgcode < SIZE_PERSO - 1)
+	if (data->img[imgcode])
 	{
 		mlx_put_image_to_window(data->mlx, data->win, \
 			data->img[imgcode], x * SPRITESIZE, y * SPRITESIZE);

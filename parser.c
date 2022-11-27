@@ -6,12 +6,12 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 01:35:45 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/26 08:55:22 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:07:40 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
+/*\*/
 t_bool	valid_extension(const char *filename)
 {
 	int	i;
@@ -106,3 +106,5 @@ int	parse_map(t_map *map)
 	map->map[i] = 0;
 	return (set_map(map));
 }
+
+/**/

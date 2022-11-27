@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 01:35:03 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/26 13:57:15 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:09:57 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	potential_errors(t_data *data)
 		memdelarr(data->map.map);
 		return (ft_printf("{magenta}Wrong map\n{reset}"));
 	}
-	print_map(data->map);
 	if (valid_path(data) != 0)
 		return (1);
 	memdelarr(data->map.map);

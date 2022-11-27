@@ -1,0 +1,26 @@
+FILE=srcs/fillmap_bonus.o
+valgrind ./so_long maps/invalid/dontwork
+valgrind ./so_long maps/invalid/dontwork.ber
+valgrind ./so_long maps/invalid/invalid_new_line.ber
+valgrind ./so_long maps/invalid/invalid_no_collect.ber
+valgrind ./so_long maps/invalid/invalid_no_exit.ber
+valgrind ./so_long maps/invalid/invalid_no_full_walls.ber
+valgrind ./so_long maps/invalid/invalid_no_player.ber
+valgrind ./so_long maps/invalid/invalid_stuck_collect.ber
+valgrind ./so_long maps/invalid/invalid_stuck_player.ber
+valgrind ./so_long maps/invalid/invalid_two_exit.ber
+valgrind ./so_long maps/invalid/invalid_two_player.ber
+valgrind ./so_long maps/invalid/invalid_empty_map.ber
+valgrind ./so_long maps/invalid/invalid_empty_line_nl.ber
+printf "\033[0;32mletsplay\033[0m\n"
+sleep 2
+valgrind ./so_long maps/maps1.ber
+valgrind ./so_long maps/maps2.ber
+valgrind ./so_long maps/maps3.ber
+if  [ -f "$FILE" ]; then
+	printf "\033[0;93mBONUS\033[0m\n"
+	valgrind ./so_long maps/invalid/invalid_no_exit_police.ber
+	valgrind ./so_long maps/bonus/maps4.ber
+	valgrind ./so_long maps/bonus/maps5.ber
+fi
+printf "\033[0;34mFIN\033[0m\n"

@@ -6,12 +6,12 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 23:30:40 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/26 18:38:26 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:11:27 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
+/*\*/
 void	print_map(const t_map map)
 {
 	int	i;
@@ -28,7 +28,7 @@ void	print_map(const t_map map)
 	ft_putchar('\n');
 }
 
-int tst(t_data *data)
+int	tst(t_data *data)
 {
 	mlx_loop_end(data->mlx);
 	return (0);
@@ -74,6 +74,7 @@ int	main(int ac, char const **av, char **env)
 		.map.map = 0,
 		.move_count = 0
 	};
+
 	if (!env)
 		return (ft_printf("{red}ENV is NULL\n{reset}"));
 	if (ac != 2)
@@ -81,11 +82,9 @@ int	main(int ac, char const **av, char **env)
 	data.map.filename = av[1];
 	data.map.test = 1;
 	if (potential_errors(& data) != -1)
-	{
-		if (data.map.map != 0)
-			memdelarr(data.map.map);
 		return (0);
-	}
 	launch_game(data);
 	return (0);
 }
+
+/**/
