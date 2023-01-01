@@ -6,19 +6,19 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 18:37:30 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/27 16:46:35 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:04:09 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
+/*\*/
 void	print_count(t_data *data, int counter)
 {
 	static int	i = 0;
 
 	mlx_put_image_to_window(data->mlx, data->win, \
 		data->img[(10 + counter % 10)], \
-		((data->width[SIZE_PATH - 2] * 32) / 2) - (32 * i), 0);
+		(((data->map.width / 2) * 32 + 32) - (32 * (i + 1))), 0);
 	i += 1;
 	if (counter > 9)
 		print_count(data, counter / 10);
@@ -47,3 +47,5 @@ int	key_hook(int keycode, t_data *data)
 		print_count(data, data->move_count);
 	return (1);
 }
+
+/**/

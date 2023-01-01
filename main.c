@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 23:30:40 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/27 16:11:27 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/12/01 17:49:56 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int	main(int ac, char const **av, char **env)
 	};
 
 	if (!env)
-		return (ft_printf("{red}ENV is NULL\n{reset}"));
+		return (ft_printf("Error\n{red}ENV is NULL\n{reset}"));
 	if (ac != 2)
-		return (ft_printf("{red}Wrong arguments\n{reset}"));
+		return (ft_printf("Error\n{red}Wrong arguments\n{reset}"));
 	data.map.filename = av[1];
 	data.map.test = 1;
 	if (potential_errors(& data) != -1)

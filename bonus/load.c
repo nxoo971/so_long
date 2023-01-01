@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:09:02 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/27 16:15:37 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/12/01 18:48:47 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	load_images(t_data *data)
 				& data->width[i], & data->height[i]);
 			if (!data->img[i])
 			{
-				ft_printf("{red}Missing sprites ({green}%s ", paths[i]);
+				ft_printf("Error\n{red}Missing sprites ({green}%s ", paths[i]);
 				ft_printf("{red}or maybe corrupted?){reset}\n");
 				if (i == 0)
 					i -= 2;

@@ -6,7 +6,7 @@
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 01:35:03 by jewancti          #+#    #+#             */
-/*   Updated: 2022/11/27 16:09:57 by jewancti         ###   ########.fr       */
+/*   Updated: 2022/12/01 20:27:07 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,28 @@ int	valid_path(t_data *data)
 			{
 				memdelarr(data->map.map);
 				return (\
-				ft_printf("{yellow}Can't collect all collectibles\n{reset}"));
+				ft_printf("Error\n"),
+					ft_printf("{yellow}"),
+					ft_printf("Can't collect all collectibles\n"),
+					ft_printf("{reset}"));
 			}
 		}
 		return (0);
 	}
 	memdelarr(data->map.map);
-	return (ft_printf("{yellow}Wrong path between P and E\n{reset}"));
+	return (ft_printf("Error\n{yellow}Wrong path between P and E\n{reset}"));
 }
 
 int	potential_errors(t_data *data)
 {
 	if (!valid_extension(data->map.filename))
-		return (ft_printf("{blue}Wrong extension name\n{reset}"));
+		return (ft_printf("Error\n{blue}Wrong extension name\n{reset}"));
 	if (parse_map(& data->map) == 0)
-		return (ft_printf("{magenta}Error while parsing map\n{reset}"));
+		return (ft_printf("Error\n{magenta}Error while parsing map\n{reset}"));
 	if (valid_map(& data->map) == 0)
 	{
 		memdelarr(data->map.map);
-		return (ft_printf("{magenta}Wrong map\n{reset}"));
+		return (ft_printf("Error\n{magenta}Wrong map\n{reset}"));
 	}
 	if (valid_path(data) != 0)
 		return (1);
@@ -53,7 +56,7 @@ int	potential_errors(t_data *data)
 	if (parse_map(& data->map) < 0)
 	{
 		memdelarr(data->map.map);
-		return (ft_printf("{gray}Unknown error\n{reset}"));
+		return (ft_printf("Error\n{gray}Unknown error\n{reset}"));
 	}
 	return (-1);
 }
